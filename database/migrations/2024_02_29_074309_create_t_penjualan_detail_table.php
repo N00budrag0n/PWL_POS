@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->integer('jumlah');
             $table->timestamps();
+            //
 
             // FK penjualan_id
             $table->foreign('penjualan_id')->references('penjualan_id')->on('t_penjualan');
