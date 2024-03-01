@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('barang_id');
             $table->unsignedBigInteger('kategori_id')->index(); //index FK
             $table->string('barang_kode',10)->unique(); //kode barang agar tidak sama
-            $table->string('barang_nama',10);
+            $table->string('barang_nama',100);
             $table->integer('harga_beli');
             $table->integer('harga_jual');
             $table->timestamps();
