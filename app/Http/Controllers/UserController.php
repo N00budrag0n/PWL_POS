@@ -12,9 +12,13 @@ class UserController extends Controller
     {
         $data =
         [
-            'nama' => 'Pelanggan Pertama',
+            'level_id' => 2,
+            'username' => 'manager_tiga',
+            'nama' => 'Manager 3',
+            'password' => Hash::make('123456'),
         ];
-        UserModel::where('username','customer-1')->update($data);
+        UserModel::create($data);
+        // UserModel::where('username','customer-1')->update($data);
         
         $user = UserModel::all();
         return view('user', ['data' => $user]);
