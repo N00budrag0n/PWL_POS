@@ -322,6 +322,11 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
+        [
+            'text' => 'Category',
+            'url'  => '/kategori',
+            'icon' => 'fas fa-fw fa-shopping-cart',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

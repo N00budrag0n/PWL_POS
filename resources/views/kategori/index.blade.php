@@ -13,6 +13,12 @@
         <div class="card">
             <div class="card-header">Manage Kategori</div>
             <div class="card-body">
+                <div class="mb-2">
+                    <a href="{{url('kategori/create')}}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus"></i>
+                        Tambah Kategori
+                    </a>
+                </div>
                 {{ $dataTable->table() }}
             </div>
         </div>
