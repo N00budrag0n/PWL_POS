@@ -9,6 +9,9 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PenjualanDetailController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ManagerController;
 
 
 /*
@@ -73,7 +76,7 @@ Route::group(['prefix' => 'barang'], function () {
 });
 
 // Stok route
-    Route::group(['prefix' => 'stok'], function () {
+Route::group(['prefix' => 'stok'], function () {
     Route::get('/', [StokController::class, 'index']);
     Route::post('/list', [StokController::class, 'list']);
     Route::get('/create', [StokController::class, 'create']);
@@ -86,7 +89,7 @@ Route::group(['prefix' => 'barang'], function () {
 
 
 // Transaksi route
-    Route::group(['prefix' => 'penjualan'], function () {
+Route::group(['prefix' => 'penjualan'], function () {
     Route::get('/', [PenjualanController::class, 'index']);
     Route::post('/list', [PenjualanController::class, 'list']);
     Route::get('/create', [PenjualanController::class, 'create']);
@@ -99,3 +102,19 @@ Route::group(['prefix' => 'barang'], function () {
 
 // Detail route
 Route::get('detail/{id}', [PenjualanDetailController::class, 'destroy']);
+
+// Auth route
+Route::get('login', [AuthController::class, 'index'])->name('login');
+Route::get('register', [AuthController::class, 'register'])->name('register');
+Route::post('proses_login', [AuthController::class, 'proses_login'])->name('proses_login');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('proses_register', [AuthController::class, 'proses_register'])->name('proses_register');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['cek_login:1']], function () {
+        Route::resource('admin', AdminController::class);
+    });
+    Route::group(['middleware' => ['cek_login:2']], function () {
+        Route::resource('manager', ManagerController::class);
+    });
+});
