@@ -21,7 +21,7 @@ class BarangController extends Controller
 
     public function show(BarangModel $barang)
     {
-        return BarangModel::find($barang);
+        return response()->json($barang, 200);
     }
 
     public function update(Request $request, BarangModel $barang)

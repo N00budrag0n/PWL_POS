@@ -21,7 +21,7 @@ class KategoriController extends Controller
 
     public function show(KategoriModel $kategori)
     {
-        return KategoriModel::find($kategori);
+        return response()->json($kategori, 200);
     }
 
     public function update(Request $request, KategoriModel $kategori)
