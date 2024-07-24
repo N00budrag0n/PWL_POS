@@ -169,24 +169,42 @@ class PenjualanController extends Controller
                 'jumlah' => $input['jumlah'],
             ]);
         }
-
-        foreach ($request->news as $new) {
-            $check = PenjualanDetailModel::where('penjualan_id', $id)->where('barang_id', $new['barang_id'])->first();
-            if ($check) {
-                PenjualanDetailModel::find($check->detail_id)->update([
-                    'barang_id' => $new['barang_id'],
-                    'jumlah' => $new['jumlah'],
-                ]);
-            } else {
-                $harga_jual = BarangModel::find($new['barang_id'])->harga_jual;
-                PenjualanDetailModel::create([
-                    'penjualan_id' => $id,
-                    'barang_id' => $new['barang_id'],
-                    'jumlah' => $new['jumlah'],
-                    'harga' => $harga_jual,
-                ]);
+        if($request->news != null){
+            foreach ($request->news as $new) {
+                $check = PenjualanDetailModel::where('penjualan_id', $id)->where('barang_id', $new['barang_id'])->first();
+                if ($check) {
+                    PenjualanDetailModel::find($check->detail_id)->update([
+                        'barang_id' => $new['barang_id'],
+                        'jumlah' => $new['jumlah'],
+                    ]);
+                } else {
+                    $harga_jual = BarangModel::find($new['barang_id'])->harga_jual;
+                    PenjualanDetailModel::create([
+                        'penjualan_id' => $id,
+                        'barang_id' => $new['barang_id'],
+                        'jumlah' => $new['jumlah'],
+                        'harga' => $harga_jual,
+                    ]);
+                }
             }
         }
+        // foreach ($request->news as $new) {
+        //     $check = PenjualanDetailModel::where('penjualan_id', $id)->where('barang_id', $new['barang_id'])->first();
+        //     if ($check) {
+        //         PenjualanDetailModel::find($check->detail_id)->update([
+        //             'barang_id' => $new['barang_id'],
+        //             'jumlah' => $new['jumlah'],
+        //         ]);
+        //     } else {
+        //         $harga_jual = BarangModel::find($new['barang_id'])->harga_jual;
+        //         PenjualanDetailModel::create([
+        //             'penjualan_id' => $id,
+        //             'barang_id' => $new['barang_id'],
+        //             'jumlah' => $new['jumlah'],
+        //             'harga' => $harga_jual,
+        //         ]);
+        //     }
+        // }
 
 
 
